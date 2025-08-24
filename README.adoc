@@ -1,0 +1,168 @@
+= Dagger Flake
+:toc: macro
+:toc-title: Table of Contents
+
+A Nix flake for packaging the Dagger CLI - a platform for CI/CD and Agent Orchestration.
+
+toc::[]
+
+== Overview
+
+This flake provides the Dagger CLI tool packaged for Nix, enabling easy installation and usage across different platforms including Linux (x86_64, aarch64) and macOS (x86_64, aarch64).
+
+Dagger is a programmable CI/CD engine that runs your pipelines in containers, providing a portable and reliable way to build, test, and deploy applications.
+
+== Usage
+
+=== Direct execution with `nix run`
+
+Run Dagger commands directly without installing:
+
+[source,bash]
+----
+# Check Dagger version
+nix run github:basisti/dagger-flake version
+
+# Initialize a new Dagger project
+nix run github:basisti/dagger-flake init
+
+# List available functions
+nix run github:basisti/dagger-flake functions
+
+# Call a specific function
+nix run github:basisti/dagger-flake call build
+----
+
+=== Using with `nix-shell`
+
+Create a temporary shell environment with Dagger available:
+
+[source,bash]
+----
+# Enter a shell with Dagger available
+nix shell github:basisti/dagger-flake
+
+# Now you can use dagger commands directly
+dagger version
+dagger init
+dagger functions
+----
+
+=== Installation with Home Manager
+
+Add to your Home Manager configuration to install Dagger permanently:
+
+[source,nix]
+----
+{
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    dagger-flake = {
+      url = "github:basisti/dagger-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
+  outputs = { nixpkgs, home-manager, dagger-flake, ... }: {
+    homeConfigurations.yourusername = home-manager.lib.homeManagerConfiguration {
+      pkgs = nixpkgs.legacyPackages.${system};
+      modules = [
+        {
+          home.packages = [
+            dagger-flake.packages.${system}.dagger
+          ];
+        }
+      ];
+    };
+  };
+}
+----
+
+Then rebuild your Home Manager configuration:
+
+[source,bash]
+----
+home-manager switch
+----
+
+=== Installation in NixOS system configuration
+
+To install _Dagger_ as a system package (available to all users), add to your NixOS system configuration:
+
+[source,nix]
+----
+{
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    dagger-flake = {
+      url = "github:basisti/dagger-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
+  outputs = { nixpkgs, dagger-flake, ... }: {
+    nixosConfigurations.yourhostname = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        {
+          environment.systemPackages = [
+            dagger-flake.packages.x86_64-linux.dagger
+          ];
+        }
+      ];
+    };
+  };
+}
+----
+
+== Development
+
+=== Building locally
+
+[source,bash]
+----
+# Clone the repository
+git clone https://github.com/basisti/dagger-flake.git
+cd dagger-flake
+
+# Build the package
+nix build
+
+# Run the built package
+./result/bin/dagger version
+----
+
+=== Development shell
+
+Enter a development environment with build dependencies:
+
+[source,bash]
+----
+nix develop
+----
+
+== Supported Platforms
+
+- Linux x86_64
+- Linux aarch64
+- macOS x86_64 (Intel)
+- macOS aarch64 (Apple Silicon)
+
+== About Dagger
+
+Dagger is a programmable CI/CD engine that enables you to:
+
+- Write CI/CD pipelines in your favorite programming language
+- Run pipelines locally or in any CI environment
+- Cache dependencies and build artifacts automatically
+- Compose and share reusable pipeline components
+
+Learn more at https://dagger.io/
+
+== License
+
+This flake is distributed under the same license as Dagger (Apache 2.0). See the LICENSE file for details.
