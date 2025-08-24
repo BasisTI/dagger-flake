@@ -31,7 +31,7 @@ stdenv.mkDerivation {
   inherit pname version;
 
   src = fetchurl {
-    url = "https://github.com/dagger/dagger/releases/download/v${version}/${pname}_${version}_${platform.arch}.tar.gz";
+    url = "https://github.com/dagger/dagger/releases/download/v${version}/${pname}_v${version}_${platform.arch}.tar.gz";
     sha256 = platform.sha256;
   };
 
