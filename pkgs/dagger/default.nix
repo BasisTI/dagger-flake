@@ -10,23 +10,19 @@ let
   platformInfo = {
     "x86_64-linux" = {
       arch = "linux_amd64";
-      sha256 = "sha256-pN+V2V2yNsLk5Jj+GAQIaNmAChg0mKwA8u9kqB2pPDY=";
+      sha256 = "sha256-pNeV2V2yNsLlKf4YBKQIbEmAp30UmKwAXvJkqTg8Uh4=";
     };
     "aarch64-linux" = {
       arch = "linux_arm64";
-      sha256 = "sha256-UvDI7gF+BppKyjZ0cDa5Rz+M1L56ghqjOZ1IuMI9b+o=";
-    };
-    "armv7l-linux" = {
-      arch = "linux_armv7";
-      sha256 = "sha256-F1iCLkM3J4REkMkB8s6QxM7Fh63cEMv6v8eBTR8w6cQ=";
+      sha256 = "sha256-UvDI7gG/BJrEsmx0cDa59yrMfaeughqiOdtISMIv/l8=";
     };
     "x86_64-darwin" = {
       arch = "darwin_amd64";
-      sha256 = "sha256-nHop+bYdEw4bI4FvgYqDIi1R4q51kMGR94Akn1A+3+U=";
+      sha256 = "sha256-nHop/bYQEw5dmRpvgYqDISsUuRp1kCSQUWcUGkDj3+U=";
     };
     "aarch64-darwin" = {
       arch = "darwin_arm64";
-      sha256 = "sha256-k60U2NHj2+XN6+K57R/lG+l/YYZmcnJ9OmITnEpmdz0=";
+      sha256 = "sha256-k60UyNITe7XN2pUO4EhMf+l/YYZlcnJhCzITnDpldz0=";
     };
   };
   platform = lib.getAttr stdenv.hostPlatform.system platformInfo;
