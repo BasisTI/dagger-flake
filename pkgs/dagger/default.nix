@@ -6,25 +6,26 @@
 
 let
   pname = "dagger";
-  version = "0.20.8";
+  version = "0.21.0";
   platformInfo = {
   "aarch64-darwin" = {
     arch = "darwin_arm64";
-    sha256 = "sha256-RMv+fuh0iJX4UcN2XIT+Ajx9y2VG9tnP+BqRKuDqnyU=";
+    sha256 = "sha256-/qEytlYRYCTisWE8P2pXUkp4H5In9WBSlRmECmCHjv8=";
   };
   "aarch64-linux" = {
     arch = "linux_arm64";
-    sha256 = "sha256-5J86oUbzrywln5S8M13/4VRmTt3/TbCt9EXWUDReAFY=";
+    sha256 = "sha256-jU86ywMRiEZWO++oiTJqtL0gJ0uBRwC5WpWY1Qre6YI=";
   };
   "x86_64-darwin" = {
     arch = "darwin_amd64";
-    sha256 = "sha256-TY14mZZg/wXvw90BwpymsCN5103usUxWp8b1iWIMk2A=";
+    sha256 = "sha256-C1Fk3yaR8t7CT876o8QrovddwkkaeY9CFvxq47ipb6Y=";
   };
   "x86_64-linux" = {
     arch = "linux_amd64";
-    sha256 = "sha256-wKRlNv3mQfaktFUpOC4RdiINIlUsL5qwE23q8AXmRts=";
+    sha256 = "sha256-Z4DfbsUZA8jcXmYMTYzbeNhZ/qE4Bwl00DqhPFvwAT0=";
   };
 };
+
 
 
 
